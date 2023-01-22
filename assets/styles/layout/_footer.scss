@@ -1,0 +1,103 @@
+// Notre footer contient :
+// 2 enfants : form et info-contact
+// Form contient : 6 éléments du form (label et input) + le submit container
+// info contact contient 4 enfants :
+// 3 div qui ont un h3 et un p ainsi que la div social avec h1 et ul
+
+footer {
+  background: $grey2;
+  min-height: 640px;
+  width: 85%;
+  margin: 0 auto 70px;
+  // Ici c'est les 2 enfants qui sont sur le grid en 50/50 (form et contact donc)
+  display: grid;
+  grid-template-columns: 50% 50%;
+
+  // ************************ Premier enfant du footer : form
+  form {
+    // Ici c'est les enfants du form qu'on va mettre en grid, dans les 50% d'espace qu'occupe le form sur la précédente grid
+    display: grid;
+    // Ecart entre les cases du grid
+    gap: 18px;
+    padding: 60px 50px;
+    // Ici chaque enfant va prendre cette taille :
+    // 18 pour les label, 45 les input, 200 la textarea et une fraction le bouton
+    grid-template-rows: 18px 45px 18px 45px 18px 200px 1fr;
+
+    label {
+      display: flex;
+      align-items: flex-end;
+      font-size: 0.7rem;
+      @include title;
+      color: $grey3;
+    }
+    input[type="text"],
+    textarea {
+      // On peut annuler l'autocomplétion dans le html avec autocomplete = none
+      background: none;
+      border: 1px solid $grey1;
+      border-radius: 4px;
+      // On évite que le user puisse changer la taille des input :
+      resize: none;
+    }
+    .submit-container {
+      display: flex;
+      align-items: flex-end;
+
+      .btn {
+        color: $grey3;
+        border: 2px solid $grey3;
+      }
+    }
+  }
+
+  // ************************ Second enfant du footer : info contact
+  .info-contact {
+    border-left: 1px solid $grey1;
+    display: grid;
+    // repeat(4,1fr) = 1fr 1 fr 1fr 1fr
+    // Etale tes 4 enfants sur 4 lignes (les 3 divs et la div sociale
+    grid-template-rows: repeat(4, 1fr);
+
+    // Ca prend les 4 divs, meme celle qui a une classe
+    div {
+      border-bottom: 1px solid $grey1;
+      display: grid;
+      // Les 3 divs de info contact ont 2 enfants : le h3 et le p. Le h3 va prendre 30% et le p 70%
+      // La 4ème div aussi à 2 enfants : le h3 et l'ul
+      grid-template-columns: 30% 70%;
+      align-items: center;
+
+      h3 {
+        @include title;
+        font-size: 0.7rem;
+        padding-left: 40px;
+        text-align: left;
+        color: $grey3;
+      }
+      p {
+        font-size: 0.8rem;
+        line-height: 26px;
+        text-align: left;
+        color: grey;
+      }
+    }
+    .social {
+      ul {
+        display: flex;
+
+        li {
+          border: 1px solid $grey1;
+          border-radius: 150px;
+          height: 40px;
+          width: 40px;
+          font-size: 0.9rem;
+          margin-right: 12px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      }
+    }
+  }
+}

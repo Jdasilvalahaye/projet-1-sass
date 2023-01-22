@@ -1,0 +1,95 @@
+// On importe nos polices. C'est nous qui décidons du nom
+@font-face {
+  font-family: "inter-bold";
+  src: url(/assets/fonts/Inter-ExtraBold.ttf);
+}
+@font-face {
+  font-family: "merri";
+  src: url(/assets/fonts/Merriweather-Light.ttf);
+}
+
+// On setup nos variables
+// Le sans serif c'est les lettres bâton. Sinon elles ont des pattes.
+$font1: inter-bold, sans-serif;
+$font2: merri, serif;
+$black1: rgb(17, 17, 17);
+$white1: rgb(243, 243, 243);
+$grey1: rgb(209, 209, 209);
+$grey2: rgb(233, 233, 233);
+$grey3: rgb(105, 105, 105);
+
+// On fait une mixin pour nos titres (sauf le premier)
+@mixin title {
+  font-family: $font1;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+// Permet au scroll d'être moins brutal
+html {
+  scroll-behavior: smooth;
+}
+
+// On retire les boules de tous nos li
+li {
+  list-style: none;
+}
+
+// On force la couleur des liens et des liens déjà visités
+a,
+a:visited {
+  color: $white1;
+}
+
+body {
+  // Img de fond du body : fixed pour dire qu'elle ne bouge pas, centrée et prend tout
+  background: url(/assets/img/bg.jpg) fixed center/cover;
+  text-align: center;
+  font-family: $font2;
+  // Ne peut pas s'agrandire au dela de 1300px de large
+  max-width: 1300px;
+  // Aucune marge en haut et en bas et marge égale à gauche et droite
+  margin: 0 auto;
+
+  &:before {
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background: $black1;
+    // On call l'animation, qui dure 1.5sec. Forward = tu garde l'état post animation donc...
+    // ... Comme l'animation dit opacité = 0 (transparent), le cadre noir du before reste invisible.
+    animation: animeBefore 1.5s ease forwards;
+    // Donne un délai avant que l'animation ne se lance
+    animation-delay: 0.15s;
+
+    // Cette animation va jusqu'à opacité 0 : quand on la donne à un élément, elle le fait aller jusqu'à 0 opacité
+    @keyframes animeBefore {
+      to {
+        opacity: 0;
+      }
+    }
+  }
+}
+
+.btn {
+  background: none;
+  border: 2px solid $black1;
+  height: 45px;
+  width: 170px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  @include title;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+}

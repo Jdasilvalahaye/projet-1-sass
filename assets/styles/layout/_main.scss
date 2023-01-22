@@ -1,0 +1,102 @@
+// Notre main contient :
+// Deux enfants : section 1  et section 2
+// Section 1 contient 5 enfants : span, h2, p, img, button
+// Section 2 contient 2 enfants : left part et right part
+// Left part contient 5 enfants : span, h3, img, p, button
+// Right part contient les mêmes 5 enfants
+
+main {
+  width: 85%;
+  margin: 0 auto 30px;
+  background: $white1;
+
+  img {
+    //100% du main
+    width: 100%;
+  }
+
+  // ************************ Premier enfant du main : section 1
+  .section1 {
+    // Idem : 80% de la section main (l'encadré blanc)
+    width: 80%;
+    margin: 0 auto;
+
+    span {
+      padding: 70px 0;
+      position: relative;
+      display: block;
+      // On va créer les barres
+      &:before,
+      &::after {
+        content: "";
+        position: absolute;
+        width: 37%;
+        height: 1px;
+        background: $grey1;
+        top: 50%;
+        transform: translateY(-50%);
+
+        // Un peu de responsive : quand l'écran fait 700px, before et after font 24 du parent
+        @media screen and (max-width: 700px) {
+          width: 24%;
+        }
+      }
+      // Là on les positionne
+      &:before {
+        left: 0;
+      }
+      &:after {
+        right: 0;
+      }
+    }
+
+    h2 {
+      @include title;
+      font-size: 3rem;
+    }
+
+    p {
+      width: 60%;
+      margin: 30px auto;
+      line-height: 35px;
+      font-style: italic;
+      font-size: 0.8rem;
+    }
+
+    .btn {
+      margin: 50px 0 90px;
+    }
+  }
+
+  // ************************ Premier enfant du main : section 2
+  .section2 {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    border-top: 1px solid $grey1;
+
+    .left-part,
+    .right-part {
+      padding: 60px;
+      // Là on attrape le spam le h3 et le p des 2 enfants de la section 2
+      span {
+        font-size: 0.75rem;
+      }
+      h3 {
+        margin: 20px 0;
+        @include title;
+        line-height: 20px;
+      }
+      p {
+        text-align: left;
+        line-height: 30px;
+        margin: 30px 0;
+        font-size: 0.8rem;
+      }
+    }
+
+    .left-part {
+      // Lignee de séparation entre les 2 parts
+      border-right: 1px solid $grey1;
+    }
+  }
+}

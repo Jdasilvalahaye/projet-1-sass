@@ -1,0 +1,134 @@
+// Là on ne va impacter que ce qui a dans la balise header du code htm
+// Notre header à : 2 enfants : header-content et nav
+// Header content a lui même 3 enfants : h1, p et span
+// Nav à 2 enfants : nav left et nav right qui ont eux même 1 enfant, UL qui a lui meme autant d'enfant que de li
+
+header {
+  // Quand on choisi la couleur ici ça modifie la couleur de tous les éléments du header donc : les h1, les p, les li
+  color: $white1;
+  position: relative;
+  min-height: 100vh;
+
+  // ************************ Premier enfant du header : Header content
+  .header-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    // Pour l'animation : on dit opacité = 0 (transparent), on déplace le contenu 40px vers le bas et on lance l'animation.
+    opacity: 0;
+    transform: translateY(40px);
+    animation: headerAnim 1.5s forwards;
+
+    // L'anim va : remonter l'élement vers le haut (Y0) et rendre opaque à 100%. Elle annule les éléments plus haut :)
+    @keyframes headerAnim {
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    h1 {
+      @include title;
+      font-size: 4rem;
+      // On annule le letter spacing de la mixin pour le rendre plus grand
+      letter-spacing: 6px;
+    }
+
+    p {
+      margin: 40px auto 60px;
+      font-style: italic;
+      width: 85%;
+    }
+
+    // La balise span contient la flèche
+    span {
+      border: 2px solid $white1;
+      border-radius: 50px;
+      height: 60px;
+      width: 60px;
+      font-size: 1.2rem;
+      // Pour centrer un enfant unique (le span n'a que le a (la fleche):
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  // ************************ Second enfant du header : nav
+  nav {
+    display: flex;
+    // On a deux éléments (enfants) dans la nav (les 2 uls), le space-between les met aux opposés
+    justify-content: space-between;
+    background: rgba(255, 255, 255, 0.255);
+    color: $white1;
+    width: 85%;
+    height: 65px;
+    z-index: 100;
+    // Rappel : on peut le placer où on veut par rapport à son parent en relative.
+    // Si pas de relative, on le place par rapport au body. Ici son parent header est en relative
+    // On met la navbar à 0px du bas du header donc.
+    position: absolute;
+    bottom: 0;
+    // Comment centrer un élément en absolute :
+    left: 50%;
+    transform: translateX(-50%);
+
+    // les 2 ul de ma nav
+    ul {
+      display: flex;
+      align-items: center;
+    }
+    // l'ul de gauche dans mon html
+    .nav-left {
+      // On a ajouté ça après avoir fait le hover pcq on veut que le premier elemn devienne normal quand on survole un autre
+      // Donc dont dit : quand on ne survole pas un élément fait ça
+      // Ca permet d'annuler les param first child quand on est pas dessus
+      // On pourrait dire : ne faisons pas le param du 1er li, mais du coup, si l'utilisateur ne passe pas sa souri dessus...
+      //... Il ne sait pas qu'il est ici dans la navigation.
+      // Donc par défaut on lui donne la couleur du hover, et quand il passe sur un autre elem, on annule
+      &:hover li:not(:hover) {
+        background: none;
+        color: $white1;
+      }
+      li {
+        @include title;
+        font-size: 0.7rem;
+        padding: 10px;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        // Le premier enfant (le premier li donc)
+        // On le met par défaut avec les param du hover
+        &:first-child {
+          background: $white1;
+          color: $black1;
+        }
+        // Quand on passe dessus, ils ont les memes param que le premier
+        &:hover {
+          background: $white1;
+          color: $black1;
+        }
+      }
+    }
+    .nav-right {
+      font-size: 1.1rem;
+      min-width: 100px;
+      width: 25%;
+      max-width: 300px;
+      justify-content: space-around;
+      margin-right: 10px;
+
+      li {
+        transition: 0.15s;
+        cursor: pointer;
+
+        &:hover {
+          transform: scale(1.3);
+        }
+      }
+    }
+  }
+}
