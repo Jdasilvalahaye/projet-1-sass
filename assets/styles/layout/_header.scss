@@ -34,6 +34,10 @@ header {
       font-size: 4rem;
       // On annule le letter spacing de la mixin pour le rendre plus grand
       letter-spacing: 6px;
+
+      @media screen and (max-width: 700px) {
+        font-size: 2rem;
+      }
     }
 
     p {
@@ -100,6 +104,10 @@ header {
         display: flex;
         align-items: center;
         cursor: pointer;
+
+        @media screen and (max-width: 700px) {
+          font-size: 0.5rem;
+        }
         // Le premier enfant (le premier li donc)
         // On le met par défaut avec les param du hover
         &:first-child {
@@ -120,6 +128,10 @@ header {
       max-width: 300px;
       justify-content: space-around;
       margin-right: 10px;
+
+      @media screen and (max-width: 700px) {
+        display: none;
+      }
 
       li {
         transition: 0.15s;

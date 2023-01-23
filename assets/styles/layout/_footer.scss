@@ -13,6 +13,10 @@ footer {
   display: grid;
   grid-template-columns: 50% 50%;
 
+  @media screen and (max-width: 900px) {
+    grid-template-columns: 1fr;
+  }
+
   // ************************ Premier enfant du footer : form
   form {
     // Ici c'est les enfants du form qu'on va mettre en grid, dans les 50% d'espace qu'occupe le form sur la précédente grid
@@ -59,6 +63,13 @@ footer {
     // Etale tes 4 enfants sur 4 lignes (les 3 divs et la div sociale
     grid-template-rows: repeat(4, 1fr);
 
+    div:nth-child(1) {
+      @media screen and (max-width: 900px) {
+        border-top: 1px solid $grey1;
+        padding-bottom: 20px;
+      }
+    }
+
     // Ca prend les 4 divs, meme celle qui a une classe
     div {
       border-bottom: 1px solid $grey1;
@@ -67,6 +78,10 @@ footer {
       // La 4ème div aussi à 2 enfants : le h3 et l'ul
       grid-template-columns: 30% 70%;
       align-items: center;
+
+      @media screen and (max-width: 900px) {
+        grid-template-columns: 45% 55%;
+      }
 
       h3 {
         @include title;
